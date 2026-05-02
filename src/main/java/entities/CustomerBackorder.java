@@ -27,9 +27,12 @@ public class CustomerBackorder {
     @JoinColumn(name = "backorderId")
     private Backorder backorder;
 
-        // for JWT
-    @Column(nullable = false)
-    private Long ownerId;
+    // for JWT
+    @Column(name = "ownerEmail",
+        nullable = false,
+        length = 200
+    )
+    private String ownerEmail;
 
 
     // getters and setters
