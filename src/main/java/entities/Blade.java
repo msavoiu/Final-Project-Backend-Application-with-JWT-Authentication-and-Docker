@@ -39,6 +39,10 @@ public class Blade {
         nullable = false)
     private Brand brand;
 
+    // for JWT
+    @Column(nullable = false)
+    private Long ownerId;
+
 
     // getters and setters
     public Long getId() {

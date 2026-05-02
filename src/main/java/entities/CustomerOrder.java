@@ -52,6 +52,10 @@ public class CustomerOrder {
         nullable = false)
     private User user;
 
+        // for JWT
+    @Column(nullable = false)
+    private Long ownerId;
+
 
     // getters and setters
     public Long getId() {

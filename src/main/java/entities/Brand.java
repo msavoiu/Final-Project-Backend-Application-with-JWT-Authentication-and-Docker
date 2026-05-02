@@ -61,6 +61,9 @@ public class Brand {
     )
     private List<Blade> blades = new ArrayList<>();
 
+    // for JWT
+    @Column(nullable = false)
+    private Long ownerId;
 
     // getters and setters
     public Long getId() {
