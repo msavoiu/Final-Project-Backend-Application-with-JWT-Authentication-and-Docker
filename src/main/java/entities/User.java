@@ -59,8 +59,4 @@ public class User {
         fetch = FetchType.EAGER
     )
     private List<CustomerOrder> customerOrders = new ArrayList<>();
-
-    // for JWT
-    @Column(nullable = false)
-    private Long ownerId;
 }
