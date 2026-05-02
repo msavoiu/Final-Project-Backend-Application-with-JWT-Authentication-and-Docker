@@ -1,15 +1,8 @@
 package config;
 
-import tools.jackson.databind.ObjectMapper;
-
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -22,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import filter.JwtFilter;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -34,24 +28,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
+                // handle cases when no token is provided
                 .exceptionHandling(ex -> ex
-                    .accessDeniedHandler((request, response, e) -> {
-                                        response.setStatus(HttpStatus.FORBIDDEN.value());
-                                        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                                        new ObjectMapper().writeValue(response.getWriter(),
-                                            Map.of("error", e.getMessage()));
-                                    })
+                    .authenticationEntryPoint((request, response, authException) -> {
+                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        response.getWriter().write("No JWT token provided or token is invalid.");
+                    })
                 )
+                // allow access to API routes with any valid JWT
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/books/**").permitAll()
-                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/books/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE, "/api/books/**").hasRole("ADMIN") // added
-                        .anyRequest().authenticated()
+                    .requestMatchers("/auth/**").permitAll()
+                    .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 
