@@ -47,8 +47,8 @@ public class BladeController {
 
     // PUT /api/blade/{id} - update an existing blade
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id) {
-        service.updateById(id);
+    public ResponseEntity<?> update(@PathVariable Long id, Blade updatedBlade) {
+        service.updateById(updatedBlade, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")
         );
