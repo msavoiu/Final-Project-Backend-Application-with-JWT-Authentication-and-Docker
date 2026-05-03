@@ -59,4 +59,12 @@ public class CustomerBackorder {
     public void setBackorder(Backorder backorder) {
         this.backorder = backorder;
     }
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
 }

@@ -108,4 +108,12 @@ public class CustomerOrder {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
 }
