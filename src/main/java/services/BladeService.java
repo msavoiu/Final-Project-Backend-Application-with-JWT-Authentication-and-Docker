@@ -28,7 +28,7 @@ public class BladeService {
     @Transactional
     public List<Blade> getAll() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return repo.getAllForUser(username);
+        return repo.findAllByOwnerEmail(username);
     }
 
     @Transactional
