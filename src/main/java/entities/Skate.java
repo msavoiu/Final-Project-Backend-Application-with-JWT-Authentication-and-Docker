@@ -101,4 +101,12 @@ public class Skate {
     public void setBrand(Brand brand) {
         this.brand = brand;
     }
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
 }
