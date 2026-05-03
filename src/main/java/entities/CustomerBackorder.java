@@ -1,13 +1,12 @@
 package entities;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,12 +17,13 @@ public class CustomerBackorder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // backorder <-> customer
-    @OneToOne(cascade = CascadeType.ALL)
+    // N customerBackorders -> 1 user
+    @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    // N customerBackorders -> 1 backorder
+    @ManyToOne
     @JoinColumn(name = "backorderId")
     private Backorder backorder;
 

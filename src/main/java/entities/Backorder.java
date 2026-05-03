@@ -11,7 +11,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,26 +32,19 @@ public class Backorder {
     @Column(name = "received")
     private Boolean received;
     
-    // 1 backorder -> N brands
-    @OneToMany(mappedBy = "backorder",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true,
-        fetch = FetchType.EAGER
-    )
-    private List<Brand> brands = new ArrayList<>();
+    // 1 backorder -> 1 brand
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "brandId")
+    private Brand brand;
 
     // 1 backorder -> N skates
     @OneToMany(mappedBy = "backorder",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true,
         fetch = FetchType.EAGER
     )
     private List<Skate> skates = new ArrayList<>();
 
     // 1 backorder -> N blades
     @OneToMany(mappedBy = "backorder",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true,
         fetch = FetchType.EAGER
     )
     private List<Blade> blades = new ArrayList<>();

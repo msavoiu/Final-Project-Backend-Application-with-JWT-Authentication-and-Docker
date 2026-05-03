@@ -46,14 +46,8 @@ public class User {
     )
     private String passwordHash;
 
-    @Column(name = "role",
-        nullable = false,
-        length = 200
-    )
-    private String role;
-
     // 1 user -> N orders
-    @OneToMany(mappedBy = "customerOrder",
+    @OneToMany(mappedBy = "user",
         cascade = CascadeType.ALL,
         orphanRemoval = true,
         fetch = FetchType.EAGER
@@ -99,14 +93,6 @@ public class User {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public List<CustomerOrder> getCustomerOrders() {

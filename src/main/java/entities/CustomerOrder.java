@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,24 +31,19 @@ public class CustomerOrder {
 
     // 1 customer order -> N skates
     @OneToMany(mappedBy = "customerOrder",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true,
         fetch = FetchType.EAGER
     )
     private List<Skate> skates = new ArrayList<>();
 
     // 1 customer order -> N blades
     @OneToMany(mappedBy = "customerOrder",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true,
         fetch = FetchType.EAGER
     )
     private List<Blade> blades = new ArrayList<>();
 
     // N orders -> 1 customer (user)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId",
-        nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "userId")
     private User user;
 
     // for JWT

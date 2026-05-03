@@ -1,0 +1,118 @@
+// brands
+{
+    "name": "Edea",
+    "phoneNumber": "+39 333262826",
+    "email": "info@edeaskates.it"
+}
+
+{
+    "name": "Jackson",
+    "phoneNumber": "+1 8002631666",
+    "email": "info@jacksonultima.com"
+}
+
+{
+    "name": "Risport",
+    "phoneNumber": "+39 0423616611",
+    "email": "info@risport.it"
+}
+
+
+// skates
+{
+    "name": "Piano",
+    "color": "White",
+    "size": "226C",
+    "price": 1099.99,
+    "brandId":  // Edea
+}
+
+{
+    "name": "Concerto",
+    "color": "White",
+    "size": "250B",
+    "price": 834.99,
+    "brandId": // Edea
+}
+
+{
+    "name": "Chorus",
+    "color": "Black",
+    "size": "230D",
+    "price": 544.99,
+    "brandId": // Edea
+}
+
+{
+    "name": "Synergy Pro",
+    "color": "Black",
+    "size": "11W",
+    "price": 1069.99,
+    "brandId": // Jackson
+}
+
+{
+    "name": "Electra",
+    "color": "White",
+    "size": "7B",
+    "price": 334.99,
+    "brandId": // Risport
+}
+
+{
+    "name": "Elara",
+    "color": "White",
+    "size": "4AA",
+    "price": 334.99,
+    "brandId": // Risport
+}
+
+
+// blades
+{
+    "name": "Ultima Legacy 8",
+    "length": 9,
+    "rocker": 8,
+    "price": 349.99,
+    "brandId": // Jackson
+}
+
+{
+    "name": "Ultima Apex Dance",
+    "length": 9,
+    "rocker": 7,
+    "price": 539.99,
+    "brandId": // Jackson
+}
+
+// customer order
+{
+    "datePlaced":, //localdate obj
+    "readyForPickup":, // bool
+    "skateIds":, // 1:N mapping of Skate objects
+    "bladeIds":, // 1:N mapping of Blade objects
+    "userId": // Long
+}
+
+// backorder
+{
+    "datePlaced" // localdate obj
+    "received" // bool
+    "brandId" // Long
+    "skateIds"// list of Long
+    "bladeIds" // list of Long
+}
+
+// customer backorder (junction)
+{
+    "customerId":, // Long
+    "backorderId": // Long
+}
+
+// user
+{
+    "email" // string
+    "name" // string
+    "phoneNumber" // string
+    "password" // string
+}
