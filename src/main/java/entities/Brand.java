@@ -39,12 +39,6 @@ public class Brand {
     )
     private String email;
 
-    @Column(name = "address",
-        nullable = false,
-        length = 255
-    )
-    private String address;
-
     // 1 brand -> N skates
     @OneToMany(mappedBy = "brand",
         cascade = CascadeType.ALL,
@@ -99,14 +93,6 @@ public class Brand {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public List<Skate> getSkates() {
