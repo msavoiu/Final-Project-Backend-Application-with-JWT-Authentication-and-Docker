@@ -124,4 +124,12 @@ public class Brand {
     public void setBlades(List<Blade> blades) {
         this.blades = blades;
     }
+
+    public String getOwnerEmail() { 
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
 }
