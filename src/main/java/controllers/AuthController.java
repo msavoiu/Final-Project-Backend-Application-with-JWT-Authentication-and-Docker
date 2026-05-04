@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import dto.UserDTO;
 import entities.User;
 
 import java.util.Map;
@@ -24,28 +25,30 @@ public class AuthController {
     @Autowired private UserDetailsService userDetailsService;
     @Autowired private JwtUtil jwtUtil;
 
-    // ── POST /api/auth/register ───────────────────────────────────────
+    // POST /api/auth/register
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
+    public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
 
-        // Check if username already taken
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        // check if username taken
+        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
             return ResponseEntity.badRequest()
                     .body(Map.of("error", "Username already exists"));
         }
 
-        // Hash the password with BCrypt before saving
-        user.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()));
+        User user = new User();
+        user.setEmail(userDTO.getEmail());
+        user.setName(userDTO.getName());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setPasswordHash(passwordEncoder.encode(userDTO.getPassword()));
 
         userRepository.save(user);
         return ResponseEntity.ok(Map.of("message", "User registered successfully"));
     }
 
-    // ── POST /api/auth/login ──────────────────────────────────────────
+    // POST /api/auth/login
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User loginRequest) {
 
-        // Validate credentials — throws exception if wrong
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getEmail(),
@@ -53,7 +56,6 @@ public class AuthController {
                 )
         );
 
-        // Load full UserDetails (with roles) and generate token
         UserDetails userDetails =
                 userDetailsService.loadUserByUsername(loginRequest.getEmail());
 

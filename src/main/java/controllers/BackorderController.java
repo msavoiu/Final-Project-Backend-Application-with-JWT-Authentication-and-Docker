@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dto.BackorderDTO;
 import entities.Backorder;
 import services.BackorderService;
 
@@ -26,8 +27,8 @@ public class BackorderController {
 
     // POST /api/backorder - create new item
     @PostMapping
-    public ResponseEntity<?> createNew(@RequestBody Backorder backorder) {
-        Backorder newBackorder = service.createNew(backorder);
+    public ResponseEntity<?> createNew(@RequestBody BackorderDTO backorderDTO) {
+        BackorderDTO newBackorder = service.createNew(backorderDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBackorder);
     }
 
@@ -41,20 +42,20 @@ public class BackorderController {
     // GET /api/backorder/{id} - get a specific backorder by ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
-        Backorder backorder = service.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(backorder);
+        BackorderDTO backorderDTO = service.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(backorderDTO);
     }
 
     // PUT /api/backorder/{id} - update an existing backorder
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, Backorder updatedBackorder) {
-        service.updateById(updatedBackorder, id);
+    public ResponseEntity<?> update(@PathVariable Long id, BackorderDTO updatedBackorderDTO) {
+        service.updateById(updatedBackorderDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")
         );
     }
 
-    // DELETE /api/backorder/{id} - delete the specific
+    // DELETE /api/backorder/{id} - delete the specific item
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         service.deleteById(id);

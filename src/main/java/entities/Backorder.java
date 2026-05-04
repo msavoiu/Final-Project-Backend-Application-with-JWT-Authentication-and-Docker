@@ -82,12 +82,12 @@ public class Backorder {
         this.received = received;
     }
 
-    public List<Brand> getBrands() {
-        return brands;
+    public Brand getBrand() {
+        return brand;
     }
 
-    public void setBrands(List<Brand> brands) {
-        this.brands = brands;
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     public List<Skate> getSkates() {

@@ -109,10 +109,17 @@
     "backorderId": // Long
 }
 
-// user
+// users
 {
-    "email" // string
-    "name" // string
-    "phoneNumber" // string
-    "password" // string
+    "email": "trusova@gmail.com",
+    "name": "Alexandra Trusova",
+    "phoneNumber": "+7 3435326877",
+    "password": "password"
+}
+
+{
+    "email": "valieva@gmail.com",
+    "name": "Kamila Valieva",
+    "phoneNumber": "+7 8552214760",
+    "password": "password"
 }
