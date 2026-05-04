@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.Skate;
+import dto.SkateDTO;
 import services.SkateService;
 
 @RestController
@@ -26,35 +26,35 @@ public class SkateController {
 
     // POST /api/skate - create new item
     @PostMapping
-    public ResponseEntity<?> createNew(@RequestBody Skate skate) {
-        Skate newSkate = service.createNew(skate);
+    public ResponseEntity<?> createNew(@RequestBody SkateDTO skateDTO) {
+        SkateDTO newSkate = service.createNew(skateDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newSkate);
     }
 
     // GET /api/skate - return all skates
     @GetMapping
     public ResponseEntity<?> getAll() {
-        List<Skate> allSkates = service.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(allSkates);
+        List<SkateDTO> allSkateDTOs = service.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(allSkateDTOs);
     }
 
     // GET /api/skate/{id} - get a specific skate by ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
-        Skate skate = service.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(skate);
+        SkateDTO skateDTO = service.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(skateDTO);
     }
 
     // PUT /api/skate/{id} - update an existing skate
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, Skate updatedSkate) {
-        service.updateById(updatedSkate, id);
+    public ResponseEntity<?> update(@PathVariable Long id, SkateDTO updatedSkateDTO) {
+        service.updateById(updatedSkateDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")
         );
     }
 
-    // DELETE /api/skate/{id} - delete the specific
+    // DELETE /api/skate/{id} - delete the specific item
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         service.deleteById(id);

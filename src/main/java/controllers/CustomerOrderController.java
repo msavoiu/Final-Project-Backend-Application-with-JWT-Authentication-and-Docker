@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.CustomerOrder;
+import dto.CustomerOrderDTO;
 import services.CustomerOrderService;
 
 @RestController
@@ -26,35 +26,35 @@ public class CustomerOrderController {
 
     // POST /api/customerOrder - create new item
     @PostMapping
-    public ResponseEntity<?> createNew(@RequestBody CustomerOrder customerOrder) {
-        CustomerOrder newCustomerOrder = service.createNew(customerOrder);
+    public ResponseEntity<?> createNew(@RequestBody CustomerOrderDTO customerOrderDTO) {
+        CustomerOrderDTO newCustomerOrder = service.createNew(customerOrderDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newCustomerOrder);
     }
 
     // GET /api/customerOrder - return all customerOrders
     @GetMapping
     public ResponseEntity<?> getAll() {
-        List<CustomerOrder> allCustomerOrders = service.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(allCustomerOrders);
+        List<CustomerOrderDTO> allCustomerOrderDTOs = service.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(allCustomerOrderDTOs);
     }
 
     // GET /api/customerOrder/{id} - get a specific customerOrder by ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
-        CustomerOrder customerOrder = service.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(customerOrder);
+        CustomerOrderDTO customerOrderDTO = service.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(customerOrderDTO);
     }
 
     // PUT /api/customerOrder/{id} - update an existing customerOrder
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, CustomerOrder updatedCustomerOrder) {
-        service.updateById(updatedCustomerOrder, id);
+    public ResponseEntity<?> update(@PathVariable Long id, CustomerOrderDTO updatedCustomerOrderDTO) {
+        service.updateById(updatedCustomerOrderDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")
         );
     }
 
-    // DELETE /api/customerOrder/{id} - delete the specific
+    // DELETE /api/customerOrder/{id} - delete the specific item
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         service.deleteById(id);

@@ -1,11 +1,13 @@
 package services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import dto.BrandDTO;
 import entities.Brand;
 import exceptions.ForbiddenException;
 import exceptions.ResourceNotFoundException;
@@ -18,44 +20,72 @@ public class BrandService {
     private BrandRepository repo;
 
     @Transactional
-    public Brand createNew(Brand brand) {
+    public BrandDTO createNew(BrandDTO brandDTO) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        Brand brand = new Brand();
+        brand.setName(brandDTO.getName());
+        brand.setPhoneNumber(brandDTO.getPhoneNumber());
+        brand.setEmail(brandDTO.getEmail());
         brand.setOwnerEmail(username);
-        return repo.save(brand);
+
+        repo.save(brand);
+
+        return brandDTO;
     }
 
     @Transactional
-    public List<Brand> getAll() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return repo.findAllByOwnerEmail(username);
-    }
-
-    @Transactional
-    public Brand getById(Long id) {
+    public List<BrandDTO> getAll() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        Brand brand = repo.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException(id));
-            
-        if (brand.getOwnerEmail() != username) {
-            throw new ForbiddenException();
-        }
-
-        return brand;
+        return repo.findAllByOwnerEmail(username).stream()
+                .map(brand -> {
+                    BrandDTO dto = new BrandDTO();
+                    dto.setName(brand.getName());
+                    dto.setPhoneNumber(brand.getPhoneNumber());
+                    dto.setEmail(brand.getEmail());
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public void updateById(Brand updatedBrand, Long id) {
+    public BrandDTO getById(Long id) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         Brand brand = repo.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException(id));
+                .orElseThrow(() -> new ResourceNotFoundException(id));
 
-        if (brand.getOwnerEmail() != username) {
+        if (!brand.getOwnerEmail().equals(username)) {
             throw new ForbiddenException();
         }
 
-        repo.save(updatedBrand);
+        BrandDTO dto = new BrandDTO();
+        dto.setName(brand.getName());
+        dto.setPhoneNumber(brand.getPhoneNumber());
+        dto.setEmail(brand.getEmail());
+
+        return dto;
+    }
+
+    @Transactional
+    public BrandDTO updateById(BrandDTO brandDTO, Long id) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        Brand brand = repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+
+        if (!brand.getOwnerEmail().equals(username)) {
+            throw new ForbiddenException();
+        }
+
+        brand.setName(brandDTO.getName());
+        brand.setPhoneNumber(brandDTO.getPhoneNumber());
+        brand.setEmail(brandDTO.getEmail());
+
+        repo.save(brand);
+
+        return brandDTO;
     }
 
     @Transactional
@@ -63,12 +93,12 @@ public class BrandService {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         Brand brand = repo.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException(id));
+                .orElseThrow(() -> new ResourceNotFoundException(id));
 
-        if (brand.getOwnerEmail() != username) {
+        if (!brand.getOwnerEmail().equals(username)) {
             throw new ForbiddenException();
         }
-        
+
         repo.deleteById(id);
     }
 }

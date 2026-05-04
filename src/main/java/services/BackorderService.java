@@ -58,9 +58,24 @@ public class BackorderService {
     }
 
     @Transactional
-    public List<Backorder> getAll() {
+    public List<BackorderDTO> getAll() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return repo.findAllByOwnerEmail(username);
+
+        return repo.findAllByOwnerEmail(username).stream()
+                .map(backorder -> {
+                    BackorderDTO dto = new BackorderDTO();
+                    dto.setDatePlaced(backorder.getDatePlaced());
+                    dto.setReceived(backorder.getReceived());
+                    dto.setBrandId(backorder.getBrand().getId());
+                    dto.setSkateIds(backorder.getSkates().stream()
+                            .map(Skate::getId)
+                            .collect(Collectors.toList()));
+                    dto.setBladeIds(backorder.getBlades().stream()
+                            .map(Blade::getId)
+                            .collect(Collectors.toList()));
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 
     @Transactional

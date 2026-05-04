@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.Blade;
+import dto.BladeDTO;
 import services.BladeService;
 
 @RestController
@@ -26,35 +26,35 @@ public class BladeController {
 
     // POST /api/blade - create new item
     @PostMapping
-    public ResponseEntity<?> createNew(@RequestBody Blade blade) {
-        Blade newBlade = service.createNew(blade);
+    public ResponseEntity<?> createNew(@RequestBody BladeDTO bladeDTO) {
+        BladeDTO newBlade = service.createNew(bladeDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBlade);
     }
 
     // GET /api/blade - return all blades
     @GetMapping
     public ResponseEntity<?> getAll() {
-        List<Blade> allBlades = service.getAll();
+        List<BladeDTO> allBlades = service.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(allBlades);
     }
 
     // GET /api/blade/{id} - get a specific blade by ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
-        Blade blade = service.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(blade);
+        BladeDTO bladeDTO = service.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(bladeDTO);
     }
 
     // PUT /api/blade/{id} - update an existing blade
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, Blade updatedBlade) {
-        service.updateById(updatedBlade, id);
+    public ResponseEntity<?> update(@PathVariable Long id, BladeDTO updatedBladeDTO) {
+        service.updateById(updatedBladeDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")
         );
     }
 
-    // DELETE /api/blade/{id} - delete the specific
+    // DELETE /api/blade/{id} - delete the specific item
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         service.deleteById(id);

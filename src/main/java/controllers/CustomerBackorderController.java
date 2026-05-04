@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.CustomerBackorder;
+import dto.CustomerBackorderDTO;
 import services.CustomerBackorderService;
 
 @RestController
@@ -26,35 +26,35 @@ public class CustomerBackorderController {
 
     // POST /api/customerBackorder - create new item
     @PostMapping
-    public ResponseEntity<?> createNew(@RequestBody CustomerBackorder customerBackorder) {
-        CustomerBackorder newCustomerBackorder = service.createNew(customerBackorder);
+    public ResponseEntity<?> createNew(@RequestBody CustomerBackorderDTO customerBackorderDTO) {
+        CustomerBackorderDTO newCustomerBackorder = service.createNew(customerBackorderDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newCustomerBackorder);
     }
 
     // GET /api/customerBackorder - return all customerBackorders
     @GetMapping
     public ResponseEntity<?> getAll() {
-        List<CustomerBackorder> allCustomerBackorders = service.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(allCustomerBackorders);
+        List<CustomerBackorderDTO> allCustomerBackorderDTOs = service.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(allCustomerBackorderDTOs);
     }
 
     // GET /api/customerBackorder/{id} - get a specific customerBackorder by ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
-        CustomerBackorder customerBackorder = service.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(customerBackorder);
+        CustomerBackorderDTO customerBackorderDTO = service.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(customerBackorderDTO);
     }
 
     // PUT /api/customerBackorder/{id} - update an existing customerBackorder
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, CustomerBackorder updatedCustomerBackorder) {
-        service.updateById(updatedCustomerBackorder, id);
+    public ResponseEntity<?> update(@PathVariable Long id, CustomerBackorderDTO updatedCustomerBackorderDTO) {
+        service.updateById(updatedCustomerBackorderDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")
         );
     }
 
-    // DELETE /api/customerBackorder/{id} - delete the specific
+    // DELETE /api/customerBackorder/{id} - delete the specific item
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         service.deleteById(id);

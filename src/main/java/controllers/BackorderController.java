@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dto.BackorderDTO;
-import entities.Backorder;
 import services.BackorderService;
 
 @RestController
@@ -35,8 +34,8 @@ public class BackorderController {
     // GET /api/backorder - return all backorders
     @GetMapping
     public ResponseEntity<?> getAll() {
-        List<Backorder> allBackorders = service.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(allBackorders);
+        List<BackorderDTO> allBackorderDTOs = service.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(allBackorderDTOs);
     }
 
     // GET /api/backorder/{id} - get a specific backorder by ID

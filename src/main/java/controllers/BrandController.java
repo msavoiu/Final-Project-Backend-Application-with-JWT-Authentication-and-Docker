@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.Brand;
+import dto.BrandDTO;
 import services.BrandService;
 
 @RestController
@@ -26,35 +26,35 @@ public class BrandController {
 
     // POST /api/brand - create new item
     @PostMapping
-    public ResponseEntity<?> createNew(@RequestBody Brand brand) {
-        Brand newBrand = service.createNew(brand);
+    public ResponseEntity<?> createNew(@RequestBody BrandDTO brandDTO) {
+        BrandDTO newBrand = service.createNew(brandDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newBrand);
     }
 
     // GET /api/brand - return all brands
     @GetMapping
     public ResponseEntity<?> getAll() {
-        List<Brand> allBrands = service.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(allBrands);
+        List<BrandDTO> allBrandDTOs = service.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(allBrandDTOs);
     }
 
     // GET /api/brand/{id} - get a specific brand by ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
-        Brand brand = service.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(brand);
+        BrandDTO brandDTO = service.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(brandDTO);
     }
 
     // PUT /api/brand/{id} - update an existing brand
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, Brand updatedBrand) {
-        service.updateById(updatedBrand, id);
+    public ResponseEntity<?> update(@PathVariable Long id, BrandDTO updatedBrandDTO) {
+        service.updateById(updatedBrandDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")
         );
     }
 
-    // DELETE /api/brand/{id} - delete the specific
+    // DELETE /api/brand/{id} - delete the specific item
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         service.deleteById(id);
