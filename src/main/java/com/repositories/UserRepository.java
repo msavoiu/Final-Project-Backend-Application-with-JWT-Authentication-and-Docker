@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    public Optional<User> findByEmail(String email);
+    public Optional<User> findByUsername(String email);
     public List<User> findAllByOwnerEmail(String ownerEmail);
 }

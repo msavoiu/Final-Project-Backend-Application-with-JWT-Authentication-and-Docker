@@ -30,16 +30,16 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
 
         // check if username taken
-        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
+        if (userRepository.findByUsername(userDTO.getUsername()).isPresent()) {
             return ResponseEntity.badRequest()
                     .body(Map.of("error", "Username already exists"));
         }
 
         User user = new User();
-        user.setEmail(userDTO.getEmail());
+        user.setUsername(userDTO.getUsername());
         user.setName(userDTO.getName());
         user.setPhoneNumber(userDTO.getPhoneNumber());
-        user.setPasswordHash(passwordEncoder.encode(userDTO.getPassword()));
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         userRepository.save(user);
         return ResponseEntity.ok(Map.of("message", "User registered successfully"));
@@ -51,13 +51,13 @@ public class AuthController {
 
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getEmail(),
-                        loginRequest.getPasswordHash()
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
                 )
         );
 
         UserDetails userDetails =
-                userDetailsService.loadUserByUsername(loginRequest.getEmail());
+                userDetailsService.loadUserByUsername(loginRequest.getUsername());
 
         String token = jwtUtil.generateToken(userDetails);
 
