@@ -35,9 +35,17 @@ public class Blade {
 
     // N blades -> 1 brand
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brandId",
-        nullable = false)
+    @JoinColumn(name = "brandId")
     private Brand brand;
+
+    @ManyToOne
+    @JoinColumn(name = "customerOrderId")
+    private CustomerOrder customerOrder;
+
+    // N blades -> 1 backorder
+    @ManyToOne
+    @JoinColumn(name = "backorderId")
+    private Backorder backorder;
 
     // for JWT
     @Column(name = "ownerEmail",
