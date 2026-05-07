@@ -47,7 +47,7 @@ public class CustomerOrderController {
 
     // PUT /api/customerOrder/{id} - update an existing customerOrder
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, CustomerOrderDTO updatedCustomerOrderDTO) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody CustomerOrderDTO updatedCustomerOrderDTO) {
         service.updateById(updatedCustomerOrderDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")

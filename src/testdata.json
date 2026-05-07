@@ -3,19 +3,19 @@
     "name": "Edea",
     "phoneNumber": "+39 333262826",
     "email": "info@edeaskates.it"
-}
+} // ID 4
 
 {
     "name": "Jackson",
     "phoneNumber": "+1 8002631666",
     "email": "info@jacksonultima.com"
-}
+} // ID 2
 
 {
     "name": "Risport",
     "phoneNumber": "+39 0423616611",
     "email": "info@risport.it"
-}
+} // ID 3
 
 
 // skates
@@ -25,7 +25,7 @@
     "size": "226C",
     "price": 1099.99,
     "brandId":  // Edea
-}
+} // ID 1
 
 {
     "name": "Concerto",
@@ -33,7 +33,7 @@
     "size": "250B",
     "price": 834.99,
     "brandId": // Edea
-}
+} // ID 2
 
 {
     "name": "Chorus",
@@ -41,7 +41,7 @@
     "size": "230D",
     "price": 544.99,
     "brandId": // Edea
-}
+} // ID 3
 
 {
     "name": "Synergy Pro",
@@ -49,7 +49,7 @@
     "size": "11W",
     "price": 1069.99,
     "brandId": // Jackson
-}
+} // ID 4
 
 {
     "name": "Electra",
@@ -57,7 +57,7 @@
     "size": "7B",
     "price": 334.99,
     "brandId": // Risport
-}
+} // ID 7
 
 {
     "name": "Elara",
@@ -65,7 +65,7 @@
     "size": "4AA",
     "price": 334.99,
     "brandId": // Risport
-}
+} // ID 8
 
 
 // blades
@@ -76,6 +76,7 @@
     "price": 349.99,
     "brandId": // Jackson
 }
+// ID 1
 
 {
     "name": "Ultima Apex Dance",
@@ -84,11 +85,12 @@
     "price": 539.99,
     "brandId": // Jackson
 }
+// ID 3
 
 // customer order
 {
     "datePlaced":, //localdate obj
-    "readyForPickup":, // bool
+    "readyForPickup": false, // bool
     "skateIds":, // 1:N mapping of Skate objects
     "bladeIds":, // 1:N mapping of Blade objects
     "userId": // Long
@@ -111,14 +113,14 @@
 
 // users
 {
-    "email": "trusova@gmail.com",
+    "username": "trusova@gmail.com",
     "name": "Alexandra Trusova",
     "phoneNumber": "+7 3435326877",
     "password": "password"
 }
 
 {
-    "email": "valieva@gmail.com",
+    "username": "valieva@gmail.com",
     "name": "Kamila Valieva",
     "phoneNumber": "+7 8552214760",
     "password": "password"

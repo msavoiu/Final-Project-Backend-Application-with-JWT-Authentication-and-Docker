@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import com.dto.LoginDTO;
 import com.dto.UserDTO;
 import com.entities.User;
 
@@ -48,7 +49,7 @@ public class AuthController {
 
     // POST /api/auth/login
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest) {
 
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

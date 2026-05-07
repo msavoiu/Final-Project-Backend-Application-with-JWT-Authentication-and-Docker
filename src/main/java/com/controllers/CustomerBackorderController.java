@@ -47,7 +47,7 @@ public class CustomerBackorderController {
 
     // PUT /api/customerBackorder/{id} - update an existing customerBackorder
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, CustomerBackorderDTO updatedCustomerBackorderDTO) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody CustomerBackorderDTO updatedCustomerBackorderDTO) {
         service.updateById(updatedCustomerBackorderDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")

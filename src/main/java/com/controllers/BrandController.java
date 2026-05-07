@@ -47,7 +47,7 @@ public class BrandController {
 
     // PUT /api/brand/{id} - update an existing brand
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, BrandDTO updatedBrandDTO) {
+    public ResponseEntity<?> update(@PathVariable Long id,@RequestBody BrandDTO updatedBrandDTO) {
         service.updateById(updatedBrandDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")

@@ -47,7 +47,7 @@ public class SkateController {
 
     // PUT /api/skate/{id} - update an existing skate
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, SkateDTO updatedSkateDTO) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody SkateDTO updatedSkateDTO) {
         service.updateById(updatedSkateDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(
             Map.of("message", "Resource updated successfully.")
