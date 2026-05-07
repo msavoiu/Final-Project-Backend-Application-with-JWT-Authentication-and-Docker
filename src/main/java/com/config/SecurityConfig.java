@@ -37,7 +37,7 @@ public class SecurityConfig {
                 )
                 // allow access to API routes with any valid JWT
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/auth/**").permitAll()
+                    .requestMatchers("/api/auth/**").permitAll()
                     .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

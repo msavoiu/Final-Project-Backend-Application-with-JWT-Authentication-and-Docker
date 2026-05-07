@@ -2,6 +2,7 @@ package com.controllers;
 
 import com.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,8 +32,8 @@ public class AuthController {
 
         // check if username taken
         if (userRepository.findByUsername(userDTO.getUsername()).isPresent()) {
-            return ResponseEntity.badRequest()
-                    .body(Map.of("error", "Username already exists"));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("error", "Username already exists"));
         }
 
         User user = new User();
