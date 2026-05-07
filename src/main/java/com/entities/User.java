@@ -1,7 +1,11 @@
 package com.entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -15,18 +19,18 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email",
+    @Column(name = "username",
         nullable = false,
         unique = true,
         length = 200
     )
-    private String email;
+    private String username;
 
     @Column(name = "name",
         nullable = false,
@@ -40,11 +44,11 @@ public class User {
     )
     private String phoneNumber;
 
-    @Column(name = "passwordHash",
+    @Column(name = "password",
         nullable = false,
         length = 200
     )
-    private String passwordHash;
+    private String password;
 
     // 1 user -> N orders
     @OneToMany(mappedBy = "user",
@@ -64,12 +68,12 @@ public class User {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String email) {
+        this.username = email;
     }
 
     public String getName() {
@@ -87,12 +91,12 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<CustomerOrder> getCustomerOrders() {
@@ -101,5 +105,10 @@ public class User {
 
     public void setCustomerOrders(List<CustomerOrder> customerOrders) {
         this.customerOrders = customerOrders;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
     }
 }
