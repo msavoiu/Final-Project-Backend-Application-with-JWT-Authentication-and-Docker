@@ -12,46 +12,51 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-        @Value("${jwt.secret}")
-        private String secret;
+    @Value("${jwt.secret}")
+    private String secret;
 
-        @Value("${jwt.expiration}")
-        private long expiration;
+    @Value("${jwt.expiration}")
+    private long expiration;
 
-        private SecretKey getSigningKey() {
-            return Keys.hmacShaKeyFor(secret.getBytes());
-        }
-
-        // generate a token
-    public String generateToken(UserDetails userDetails) {
-            return Jwts.builder()
-                    .subject(userDetails.getUsername())
-                    .issuedAt(new Date())
-                    .expiration(new Date(System.currentTimeMillis() + expiration))
-                    .signWith(getSigningKey())
-                    .compact();
+    private SecretKey getSigningKey() {
+        return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    public String extractUsername(String token) {
-            return extractClaims(token).getSubject();
+// generate a token
+    public String generateToken(UserDetails userDetails, Long userId, String email) {
+        return Jwts.builder()
+            .subject(String.valueOf(userId)) // database ID
+            .claim("email", email) // email
+            .issuedAt(new Date()) // time issued
+            .expiration(new Date(System.currentTimeMillis() + expiration)) // expiration
+            .signWith(getSigningKey())
+            .compact();
+    }
+
+    public String extractId(String token) {
+        return extractClaims(token).getSubject();
+    }
+
+    public String extractEmail(String token) {
+        return extractClaims(token).get("email", String.class);
     }
 
     public Claims extractClaims(String token) {
-            return Jwts.parser()
-                    .verifyWith(getSigningKey())
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload();
+        return Jwts.parser()
+            .verifyWith(getSigningKey())
+            .build()
+            .parseSignedClaims(token)
+            .getPayload();
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
-            final String username = extractUsername(token);
+        final String username = extractEmail(token);
 
-            return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
     public boolean isTokenExpired(String token) {
-            return extractClaims(token).getExpiration().before(new Date());
+        return extractClaims(token).getExpiration().before(new Date());
     }
 
 

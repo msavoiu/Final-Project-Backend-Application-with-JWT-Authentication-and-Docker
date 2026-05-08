@@ -3,7 +3,8 @@
     "name": "Edea",
     "phoneNumber": "+39 333262826",
     "email": "info@edeaskates.it"
-} // ID 4
+}
+// ID 1
 
 {
     "name": "Jackson",
@@ -24,48 +25,54 @@
     "color": "White",
     "size": "226C",
     "price": 1099.99,
-    "brandId":  // Edea
-} // ID 1
+    "brandId": 1
+}
+// ID 1
 
 {
     "name": "Concerto",
     "color": "White",
     "size": "250B",
     "price": 834.99,
-    "brandId": // Edea
-} // ID 2
+    "brandId": 1
+}
+// ID 2
 
 {
     "name": "Chorus",
     "color": "Black",
     "size": "230D",
     "price": 544.99,
-    "brandId": // Edea
-} // ID 3
+    "brandId": 1
+}
+// ID 3
 
 {
     "name": "Synergy Pro",
     "color": "Black",
     "size": "11W",
     "price": 1069.99,
-    "brandId": // Jackson
-} // ID 4
+    "brandId": 2
+}
+// ID 4
 
 {
     "name": "Electra",
     "color": "White",
     "size": "7B",
     "price": 334.99,
-    "brandId": // Risport
-} // ID 7
+    "brandId": 3
+}
+// ID 5
 
 {
     "name": "Elara",
     "color": "White",
     "size": "4AA",
     "price": 334.99,
-    "brandId": // Risport
-} // ID 8
+    "brandId": 3
+}
+// ID 6
 
 
 // blades
@@ -74,7 +81,7 @@
     "length": 9,
     "rocker": 8,
     "price": 349.99,
-    "brandId": // Jackson
+    "brandId": 2
 }
 // ID 1
 
@@ -83,33 +90,28 @@
     "length": 9,
     "rocker": 7,
     "price": 539.99,
-    "brandId": // Jackson
+    "brandId": 2
 }
-// ID 3
+// ID 2
 
 // customer order
 {
-    "datePlaced":, //localdate obj
-    "readyForPickup": false, // bool
-    "skateIds":, // 1:N mapping of Skate objects
-    "bladeIds":, // 1:N mapping of Blade objects
-    "userId": // Long
+    "datePlaced": "2026-05-07",
+    "readyForPickup": false,
+    "skateIds": [1, 2],
+    "bladeIds": [1],
+    "userId": 1
 }
+// ID 1
 
-// backorder
 {
-    "datePlaced" // localdate obj
-    "received" // bool
-    "brandId" // Long
-    "skateIds"// list of Long
-    "bladeIds" // list of Long
+    "datePlaced": "2026-05-07",
+    "readyForPickup": false,
+    "skateIds": [3, 4],
+    "bladeIds": [2],
+    "userId": 1
 }
-
-// customer backorder (junction)
-{
-    "customerId":, // Long
-    "backorderId": // Long
-}
+// ID 2
 
 // users
 {
@@ -118,6 +120,7 @@
     "phoneNumber": "+7 3435326877",
     "password": "password"
 }
+// ID 1
 
 {
     "username": "valieva@gmail.com",
@@ -125,3 +128,4 @@
     "phoneNumber": "+7 8552214760",
     "password": "password"
 }
+// ID 2
