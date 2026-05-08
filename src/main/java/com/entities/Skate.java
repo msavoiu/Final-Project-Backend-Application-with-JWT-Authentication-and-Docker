@@ -45,14 +45,10 @@ public class Skate {
         nullable = false)
     private Brand brand;
 
-    // N skates -> 1 backorder
-    @ManyToOne
-    @JoinColumn(name = "backorderId")
-    private Backorder backorder;
-
-    @ManyToOne
-    @JoinColumn(name = "customerOrderId")
-    private CustomerOrder customerOrder;
+    // // N skates -> 1 customer order
+    // @ManyToOne
+    // @JoinColumn(name = "customerOrderId")
+    // private CustomerOrder customerOrder;
 
     // for JWT
     @Column(name = "ownerEmail",

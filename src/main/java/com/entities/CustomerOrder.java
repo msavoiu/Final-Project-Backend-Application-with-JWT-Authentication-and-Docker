@@ -11,8 +11,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,15 +30,21 @@ public class CustomerOrder {
     @Column(name = "readyForPickup")
     private Boolean readyForPickup;
 
-    // 1 customer order -> N skates
-    @OneToMany(mappedBy = "customerOrder",
-        fetch = FetchType.EAGER
+    // N skates <-> N orders
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "customer_order_skates",
+        joinColumns = @JoinColumn(name = "customerOrderId"),
+        inverseJoinColumns = @JoinColumn(name = "skateId")
     )
     private List<Skate> skates = new ArrayList<>();
 
-    // 1 customer order -> N blades
-    @OneToMany(mappedBy = "customerOrder",
-        fetch = FetchType.EAGER
+    // N blades <-> N orders
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "customer_order_blades",
+        joinColumns = @JoinColumn(name = "customerOrderId"),
+        inverseJoinColumns = @JoinColumn(name = "bladeId")
     )
     private List<Blade> blades = new ArrayList<>();
 

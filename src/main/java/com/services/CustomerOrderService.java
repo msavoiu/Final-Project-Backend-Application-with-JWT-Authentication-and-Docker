@@ -50,6 +50,7 @@ public class CustomerOrderService {
         customerOrder.setUser(user);
         customerOrder.setSkates(skates);
         customerOrder.setBlades(blades);
+        customerOrder.setUser(user);
         customerOrder.setOwnerEmail(username);
 
         repo.save(customerOrder);
