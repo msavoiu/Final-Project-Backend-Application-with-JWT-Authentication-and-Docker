@@ -51,7 +51,6 @@ public class JwtUtil {
 
     public boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractEmail(token);
-
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
