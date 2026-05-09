@@ -5,6 +5,8 @@ For this project, I decided to implement a backend system for a skate shop to ha
 This ER diagram represents my database's schema, and shows the 1:N and N:N relationships I implemented.
 ![](./readmeImages/erdiagram.png)
 
+Here is a [YouTube link to the demo video](https://youtu.be/odU3ZQ5hsV8).
+
 ## Prerequisities
 **Java version:** 17 <br>
 **Docker version:** 29.4.2
