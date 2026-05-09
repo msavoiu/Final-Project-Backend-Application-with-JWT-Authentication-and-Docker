@@ -1,4 +1,8 @@
-# Final-Project-Backend-Application-with-JWT-Authentication-and-Docker
+# Final Project: Backend Application with JWT Authentication and Docker
+
+For this project, I decided to implement a backend system for a skate shop to handle orders with.
+
+![](./readmeImages/erdiagram.png)
 
 ## Prerequisities
 **Java version:** 17 <br>
