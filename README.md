@@ -20,10 +20,10 @@ docker build -t demo-app:1.0 .
 
 ## Docker run command
 ```bash
-docker run -d --name demo-app -p 8080:8080
-  -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/cpsc449final
-  -e SPRING_DATASOURCE_USERNAME=madeline
-  -e SPRING_DATASOURCE_PASSWORD=
+docker run -d --name demo-app -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/cpsc449final \
+  -e SPRING_DATASOURCE_USERNAME=madeline \
+  -e SPRING_DATASOURCE_PASSWORD= \
   demo-app:1.0
 ```
 

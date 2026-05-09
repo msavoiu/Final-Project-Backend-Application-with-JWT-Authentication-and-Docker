@@ -4,20 +4,18 @@
     "phoneNumber": "+39 333262826",
     "email": "info@edeaskates.it"
 }
-// ID 1
 
 {
     "name": "Jackson",
     "phoneNumber": "+1 8002631666",
     "email": "info@jacksonultima.com"
-} // ID 2
+}
 
 {
     "name": "Risport",
     "phoneNumber": "+39 0423616611",
     "email": "info@risport.it"
-} // ID 3
-
+}
 
 // skates
 {
@@ -27,7 +25,6 @@
     "price": 1099.99,
     "brandId": 1
 }
-// ID 1
 
 {
     "name": "Concerto",
@@ -36,7 +33,6 @@
     "price": 834.99,
     "brandId": 1
 }
-// ID 2
 
 {
     "name": "Chorus",
@@ -45,7 +41,6 @@
     "price": 544.99,
     "brandId": 1
 }
-// ID 3
 
 {
     "name": "Synergy Pro",
@@ -54,7 +49,6 @@
     "price": 1069.99,
     "brandId": 2
 }
-// ID 4
 
 {
     "name": "Electra",
@@ -63,7 +57,6 @@
     "price": 334.99,
     "brandId": 3
 }
-// ID 5
 
 {
     "name": "Elara",
@@ -72,7 +65,6 @@
     "price": 334.99,
     "brandId": 3
 }
-// ID 6
 
 
 // blades
@@ -83,7 +75,6 @@
     "price": 349.99,
     "brandId": 2
 }
-// ID 1
 
 {
     "name": "Ultima Apex Dance",
@@ -92,7 +83,6 @@
     "price": 539.99,
     "brandId": 2
 }
-// ID 2
 
 // customer order
 {
@@ -102,7 +92,6 @@
     "bladeIds": [1],
     "userId": 1
 }
-// ID 1
 
 {
     "datePlaced": "2026-05-07",
@@ -111,7 +100,6 @@
     "bladeIds": [2],
     "userId": 1
 }
-// ID 2
 
 // users
 {
@@ -120,7 +108,6 @@
     "phoneNumber": "+7 3435326877",
     "password": "password"
 }
-// ID 1
 
 {
     "username": "valieva@gmail.com",
@@ -128,4 +115,3 @@
     "phoneNumber": "+7 8552214760",
     "password": "password"
 }
-// ID 2
